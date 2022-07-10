@@ -25,8 +25,7 @@ class User extends Model {
   }
 
   static associate(models) {
-    models.Listas.hasMany(models.User);
-    this.belongsTo(models.Listas, {foreignKey: 'lista_id', as: 'lista'});
+    this.hasMany(models.Listas, {foreignKey: 'user_id', as: 'user'});
   }
 }
 

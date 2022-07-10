@@ -27,16 +27,16 @@ routes.get('/user', UserController.index)
 //Test
 
 // Listas
-routes.get('/lista', ListaController.index);
+routes.get('/lista/:lista_id', ListaController.index);
 routes.post('/lista', ListaController.store);
 routes.put('/lista', ListaController.update);
 routes.delete('/lista/:id', ListaController.delete);
 
 // Itens
-routes.post('/item', ItemController.store);
+routes.post('/lista/:lista_id/item', ItemController.store);
 routes.put('/item', ItemController.update);
 routes.delete('/item/:id', ItemController.delete);
-routes.get('/item', ItemController.index);
+routes.get('/lista/:lista_id/item', ItemController.index);
 
 
 

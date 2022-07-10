@@ -10,7 +10,7 @@ class UserController {
       include: [
         {
           model: Listas,
-          as: "listas",
+          as: "lista",
           attributes: ["mes"],
         },
       ],

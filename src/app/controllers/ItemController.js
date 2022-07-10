@@ -6,22 +6,20 @@ const Listas = require('../models/Lista');
 
 class ItemController{
     async index(req, res){
-        const itens = await Item.findAll({
-            attributes: ["name_item", "category"],
-            include: [
-                {
-                    model: Listas,
-                    as: "lista",
-                    attributes: ["mes"]
-                }
-            ]
-        });
-        return res.json(itens);
+
+        const {lista_id} = req.params;
+
+        const listas = await Listas.findByPk(lista_id,{
+            include:{
+                association: 'lista'
+            }
+        })
+
+        return res.json(listas);
     }
 
     async store(req, res){
         const schema = Yup.object().shape({
-            list_id: Yup.string().required(),
             nameItem: Yup.string().required(),
             category: Yup.string().required(),
         });
@@ -29,17 +27,18 @@ class ItemController{
         if(!(await schema.isValid(req.body))){
             return res.status(400).json({msg: "Campos inválidos"});
         }
-        const  { nameItem, category, list_id } = req.body;
+        const  { lista_id } = req.params;
+        console.log(lista_id)
 
-        console.log(nameItem, category, list_id)
+        const {nameItem, category} = req.body;
 
-        const listExist = await Listas.findByPk(list_id);
+        const listExist = await Listas.findByPk(lista_id);
         if(!listExist){
             return res.status(401).json({msg: "Lista não existe!"});
         }
 
         const item = await Item.create({
-            lista_id: list_id,
+            lista_id: lista_id,
             nameItem: nameItem,
             category: category,
         });

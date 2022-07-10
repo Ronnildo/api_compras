@@ -6,9 +6,21 @@ const Yup = require("yup");
 
 class ListaController{
     async index(req, res){
-        const listas = await Lista.findAll();
+        const user = await User.findByPk(req.userId, {
+            include: {
+                association: 'user',
+            }
+        });
 
-        return res.json(listas);
+        const {lista_id} = req.params;
+
+        const listas = await Lista.findByPk(lista_id,{
+            include:{
+                association: 'lista'
+            }
+        })
+       
+        return res.json({user, listas});
     }
 
     async store(req, res){
