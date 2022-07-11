@@ -14,9 +14,10 @@ class Listas extends Model{
     }
 
     static associate(models){
-        this.belongsTo(models.User, {foreignKey: 'user_id', as: 'user'});
+        // this.belongsTo(models.User, {foreignKey: 'user_id', as: 'user'});
+        this.belongsTo(models.Cell, {foreignKey: 'cell_id', as: 'cell'});
         
-        this.hasMany(models.Itens, {foreignKey: 'lista_id', as: 'lista'});
+        this.hasMany(models.Itens, {foreignKey: 'lista_id', as: 'itens'});
     }
 }
 module.exports = Listas;

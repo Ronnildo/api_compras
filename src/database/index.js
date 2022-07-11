@@ -3,8 +3,9 @@ const Lista = require('../app/models/Lista');
 const User = require('../app/models/User');
 const Item = require('../app/models/Item');
 const databaseConfig = require('../config/database');
+const CellUser = require('../app/models/Cell');
 
-const models = [User, Lista, Item];
+const models = [User, Lista, Item, CellUser];
 
 class Database{
     constructor(){

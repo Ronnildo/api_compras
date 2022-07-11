@@ -1,8 +1,10 @@
 const Lista = require('../models/Lista');
 const User = require('../models/User');
+const Item = require('../models/Item');
 
 const { password } = require('../../config/database');
 const Yup = require("yup");
+const Cell = require('../models/Cell');
 
 class ListaController{
     async index(req, res){
@@ -12,15 +14,23 @@ class ListaController{
             }
         });
 
-        const {lista_id} = req.params;
+        const {lista_id, cell_id} = req.params;
 
-        const listas = await Lista.findByPk(lista_id,{
-            include:{
-                association: 'lista'
-            }
-        })
+        const cell = await Cell.findByPk(cell_id, {
+            attributes: ['id', 'cell_id'],
+            include: {
+                association: 'listas',
+            },  
+        });
+
+        // const itens = await Lista.findByPk(lista_id,{
+        //     attributes: ['id', 'mes'],
+        //     include:{
+        //         association: 'itens'
+        //     }
+        // })
        
-        return res.json({user, listas});
+        return res.json({cell});
     }
 
     async store(req, res){
@@ -35,15 +45,23 @@ class ListaController{
 
         const { mes } = req.body;
 
-        const userCad = await User.findOne({
-            where: {
-                id: req.userId,
-            }
-        });
-        
-        if(!userCad){
+        const {cell_id} = req.params;
+        console.log(cell_id)
+        const cellExists = await Cell.findOne({where: {id: cell_id}});
+        console.log(cellExists)
+        if(!cellExists){
             return res.status(401).json({msg: "Usuário não cadastrado!"});
         }
+
+        // const userCad = await User.findOne({
+        //     where: {
+        //         id: req.userId,
+        //     }
+        // });
+        
+        // if(!userCad){
+        //     return res.status(401).json({msg: "Usuário não cadastrado!"});
+        // }
         
         //console.log(req.userId)
         const existsMes  = await Lista.findOne({where: {mes: mes} });
@@ -52,7 +70,8 @@ class ListaController{
         }
 
         const lista = await Lista.create({
-            user_id: req.userId,
+            //user_id: req.userId,
+            cell_id: cell_id,
             mes: mes,
         });
 

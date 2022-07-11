@@ -1,5 +1,4 @@
 const Item = require('../models/Item');
-const User = require('../models/User');
 const { password } = require('../../config/database');
 const Yup = require("yup");
 const Listas = require('../models/Lista');
@@ -11,9 +10,13 @@ class ItemController{
 
         const listas = await Listas.findByPk(lista_id,{
             include:{
-                association: 'lista'
+                association: 'itens'
             }
-        })
+        });
+
+        if(!listas){
+            return res.status(400).json({msg: "Lista não existe!"});
+        }
 
         return res.json(listas);
     }

@@ -24,9 +24,9 @@ class User extends Model {
     return this;
   }
 
-  static associate(models) {
-    this.hasMany(models.Listas, {foreignKey: 'user_id', as: 'user'});
-  }
+  // static associate(models) {
+  //   this.hasMany(models.Listas, {foreignKey: 'user_id', as: 'user'});
+  // }
 }
 
 module.exports = User;
