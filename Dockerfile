@@ -7,6 +7,8 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3333
+ENV NODE_ENV=production
 
-CMD ["npm", "start"]
+EXPOSE 8080
+
+CMD ["npm", "start", "dev"]
