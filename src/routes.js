@@ -19,18 +19,18 @@ routes.post('/user', UserController.store);
 routes.post('/session', SessionController.store);
 
 routes.post('/cell', CellUserController.store);
-routes.get('/cell', CellUserController.index);
+routes.get('/cells', CellUserController.index);
 
 // Listas
 routes.post('/cell/:cell_id/lista', ListaController.store);
-routes.get('/cell/:cell_id/lista/:lista_id', ListaController.index);
+routes.get('/cell/:cell_id/lista/:lista_id/listas', ListaController.index);
 routes.put('/lista', ListaController.update);
 routes.delete('/lista/:id', ListaController.delete);
 //routes.post('/lista', ListaController.store);
 
 // Itens
 routes.post('/lista/:lista_id/item', ItemController.store);
-routes.get('/lista/:lista_id/item', ItemController.index);
+routes.get('/lista/:lista_id/itens', ItemController.index);
 routes.put('/item', ItemController.update);
 routes.delete('/item/:id', ItemController.delete);
 

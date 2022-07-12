@@ -1,12 +1,12 @@
 FROM node:16
 
-WORKDIR /usr
+WORKDIR /usr/app
 
 COPY package*.json ./
-RUN yarn
+RUN npm install
 
 COPY . .
 
 EXPOSE 3333
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]

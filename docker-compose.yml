@@ -3,14 +3,28 @@ services:
   app:
     build: .
     command: yarn start
+    container_name: "server-apicompras"
     ports:
       - "3000:3000"
     env_file: .env
+    links:
+      - db
     depends_on:
       - db
+
+    environment:
+      - DB_HOST= ${DB_HOST}
+      - DB_USER= ${DB_USER}
+      - DB_PASS= ${DB_PASS}
+      - DB_NAME= ${DB_NAME}
     volumes:
-      - .:/usr
+      - .:/usr/src
   db:
     image: postgres:latest
+    container_name: "shoplist"
     ports:
       - "5432:5432"
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_NAME=${DB_NAME}
