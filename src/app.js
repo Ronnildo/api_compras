@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 
 const routes = require('./routes');
 
@@ -16,6 +17,7 @@ class App{
 
     routes(){
         this.server.use(routes);
+        this.server.use(cors())
     }
 }
 
