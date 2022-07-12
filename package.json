@@ -1,7 +1,7 @@
 {
   "name": "api_compras",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "repository": "https://github.com/Ronnildo/api_compras.git",
   "author": "Ronnildo",
   "license": "MIT",
