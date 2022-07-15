@@ -1,17 +1,19 @@
 require('dotenv').config();
 
+const con = `postgresql://${process.env.DATABASE_USER}:${process.env.DATABASE_PASS}@${process.env.DATABASE_HOST}:5432/${process.env.DATABASE_NAME}`
+
 module.exports = {
-    dialect:process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
+    dialect:"postgres",
+    host: "localhost",
+    username: "postgres",
+    password:"123456",
+    database: "postgres",
     define: {
       timestamps: true,
       underscored: true,
       underscoredAll: true,
     },
-    connectionString: process.env.DATBASE_URL,
+    connectionString: con ? process.env.DATABASE_URL: this.connectionString,
     ssl: {
       rejectUnathorized: false,
     }
