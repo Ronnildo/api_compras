@@ -4,16 +4,16 @@ const con = `postgresql://${process.env.DATABASE_USER}:${process.env.DATABASE_PA
 
 module.exports = {
     dialect:"postgres",
-    host: "localhost",
-    username: "postgres",
-    password:"123456",
-    database: "postgres",
-    define: {
-      timestamps: true,
-      underscored: true,
-      underscoredAll: true,
-    },
-    connectionString: con ? process.env.DATABASE_URL: this.connectionString,
+    // host: "localhost",
+    // username: "postgres",
+    // password:"123456",
+    // database: "postgres",
+    // define: {
+    //   timestamps: true,
+    //   underscored: true,
+    //   underscoredAll: true,
+    // },
+    connectionString: con ? process.env.DATABASE_URL: connectionString,
     ssl: {
       rejectUnathorized: false,
     }
