@@ -4,7 +4,7 @@ const { DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_NAME } =
   process.env;
 
 module.exports = {
-  //url: process.env.DATABASE_URL,
+  url: process.env.DATABASE_URL,
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
