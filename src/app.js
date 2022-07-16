@@ -3,7 +3,7 @@ const cors = require('cors')
 
 const routes = require('./routes');
 
-require('./database/sequelize');
+require('./database');
 
 class App{
     constructor(){

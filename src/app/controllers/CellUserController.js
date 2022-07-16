@@ -19,8 +19,8 @@ class CellController{
 
         const { cell_id } = req.body;
         console.log(cell_id)
-        const idExists = await Cell.findOne({where: {cell_id: req.body.cell_id}});
-
+        const idExists = await Cell.findOne({where: {cell_id: cell_id}});
+        console.log(idExists)
         if(idExists){
             return res.status(400).json({msg: "Usuário já existe"});
         }
