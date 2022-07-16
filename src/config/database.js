@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const { DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_NAME } =
   process.env;
-
+//console.log(DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_NAME)
 module.exports = {
   url: process.env.DATABASE_URL,
   username: process.env.DATABASE_USERNAME,
