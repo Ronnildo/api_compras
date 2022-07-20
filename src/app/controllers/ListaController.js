@@ -8,18 +8,25 @@ const Cell = require('../models/Cell');
 
 class ListaController{
     async index(req, res){
-        const user = await User.findByPk(req.userId, {
-            include: {
-                association: 'user',
-            }
+
+        const schema = Yup.object().shape({
+            cell_id: Yup.string().required(),
         });
 
-        const {lista_id, cell_id} = req.params;
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({msg: "Campos inválidos"});
+        }
 
-        const cell = await Cell.findByPk(cell_id, {
+        const {cell_id} = req.body;
+
+        const cellExists = await Cell.findOne({where: {cell_id: cell_id}});
+        console.log(cellExists);
+
+        const cell = await Cell.findByPk(cellExists.id, {
             attributes: ['id', 'cell_id'],
             include: {
                 association: 'listas',
+                attributes: ["id", "mes", "cell_id"]
             },  
         });
 

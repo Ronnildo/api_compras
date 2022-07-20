@@ -4,11 +4,11 @@ const { DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_NAME } =
   process.env;
 //console.log(DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_NAME)
 module.exports = {
-  // username: "postgres",
-  // password: "123456",
-  // database: "postgres",
-  // host: "localhost",
-  dialect: "postgres",
+  /*username: "postgres",
+  password: "123456",
+  database: "postgres",
+  host: "localhost",
+  dialect: "postgres",*/
   url: process.env.DATABASE_URL,
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,

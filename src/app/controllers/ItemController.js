@@ -9,8 +9,10 @@ class ItemController{
         const {lista_id} = req.params;
 
         const listas = await Listas.findByPk(lista_id,{
+            attributes: ["id", "mes", "cell_id"],
             include:{
-                association: 'itens'
+                association: 'itens',
+                attributes: ["id", "nameItem", "category", "lista_id"]
             }
         });
 
