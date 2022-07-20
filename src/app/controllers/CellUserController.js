@@ -8,7 +8,7 @@ class CellController{
         const user = await Cell.findAll({
             attributes: ["id", "cell_id"]
         });
-        return res.json({"data": user});
+        return res.json({data: user});
       }
     async store(req, res){
         const schema = Yup.object().shape({
