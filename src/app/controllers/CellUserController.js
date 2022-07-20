@@ -5,8 +5,10 @@ const Cell = require('../models/Cell');
 
 class CellController{
     async index(req, res){
-        const user = await Cell.findAll();
-        return res.json(user);
+        const user = await Cell.findAll({
+            attributes: ["id", "cell_id"]
+        });
+        return res.json({"data": user});
       }
     async store(req, res){
         const schema = Yup.object().shape({
