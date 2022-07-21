@@ -12,15 +12,15 @@ class CellController{
         return res.json({data: user});
       }
     async store(req, res){
-        /*const schema = Yup.object().shape({
+        const schema = Yup.object().shape({
             cell_id: Yup.string().required(),
         });
 
         if(!(await schema.isValid(req.body))){
             return res.status(400).json({msg: "Campos inválidos"});
-        }*/
+        }
 
-        const { cell_id } = req.params;
+        const { cell_id } = req.body;
         console.log(cell_id)
         const idExists = await Cell.findOne({where: {cell_id: cell_id}});
         console.log(idExists)
