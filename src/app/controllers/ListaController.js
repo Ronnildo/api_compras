@@ -37,7 +37,7 @@ class ListaController{
         //     }
         // })
        
-        return res.json({cell});
+        return res.json(cell);
     }
 
     async store(req, res){
