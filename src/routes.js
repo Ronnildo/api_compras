@@ -22,6 +22,7 @@ routes.get("/cells", CellUserController.index);
 // Listas
 routes.post("/lista", ListaController.store);
 routes.get("/cell/listas", ListaController.index);
+routes.get("/cell/:cell_id/listas", ListaController.index);
 routes.put("/updatelista", ListaController.update);
 routes.delete("/lista/:lista_id", ListaController.delete);
 //routes.post('/lista', ListaController.store);
