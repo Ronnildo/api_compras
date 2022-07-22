@@ -20,7 +20,7 @@ routes.post("/cell/", CellUserController.store);
 routes.get("/cells", CellUserController.index);
 
 // Listas
-routes.post("/lista", ListaController.store);
+routes.post("/lista/:cell_id", ListaController.store);
 routes.get("/cell/listas", ListaController.index);
 routes.get("/cell/:cell_id/listas", ListaController.index);
 routes.put("/updatelista", ListaController.update);

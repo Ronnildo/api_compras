@@ -8,15 +8,6 @@ const Cell = require('../models/Cell');
 
 class ListaController{
     async index(req, res){
-
-        // const schema = Yup.object().shape({
-        //     cell_id: Yup.string().required(),
-        // });
-
-        // if(!(await schema.isValid(req.body))){
-        //     return res.status(400).json({msg: "Campos inválidos"});
-        // }
-
         const {cell_id} = req.params;
 
         const cellExists = await Cell.findOne({where: {cell_id: cell_id}});
@@ -29,48 +20,26 @@ class ListaController{
                 attributes: ["id", "mes", "cell_id"]
             },  
         });
-
-        // const itens = await Lista.findByPk(lista_id,{
-        //     attributes: ['id', 'mes'],
-        //     include:{
-        //         association: 'itens'
-        //     }
-        // })
        
         return res.json(cell);
     }
 
     async store(req, res){
-
         const schema = Yup.object().shape({
             mes: Yup.string().required(),
-            //usuario_id: Yup.number().required()
         });
         if(!(await schema.isValid(req.body))){
             return res.status(400).json({msg: 'Campos inválidos'});
         }
-
-        const { mes } = req.body;
-
+        
         const {cell_id} = req.params;
-        console.log(cell_id)
-        const cellExists = await Cell.findOne({where: {id: cell_id}});
-        console.log(cellExists)
+        const cellExists = await Cell.findOne({where: {cell_id: cell_id}});
+
         if(!cellExists){
             return res.status(401).json({msg: "Usuário não cadastrado!"});
         }
-
-        // const userCad = await User.findOne({
-        //     where: {
-        //         id: req.userId,
-        //     }
-        // });
         
-        // if(!userCad){
-        //     return res.status(401).json({msg: "Usuário não cadastrado!"});
-        // }
-        
-        //console.log(req.userId)
+        const { mes } = req.body;
         const existsMes  = await Lista.findOne({where: {mes: mes} });
         if(existsMes){
             return res.status(400).json({msg: "Você já possui uma lista para esse mês!"});
@@ -78,7 +47,7 @@ class ListaController{
 
         const lista = await Lista.create({
             //user_id: req.userId,
-            cell_id: cell_id,
+            cell_id: cellExists.id,
             mes: mes,
         });
 
