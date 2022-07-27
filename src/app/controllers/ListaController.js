@@ -33,7 +33,8 @@ class ListaController{
         }
         
         const {cell_id} = req.params;
-        const cellExists = await Cell.findOne({where: {cell_id: cell_id}});
+        const cellExists = await Cell.findOne({where: {cell_id:cell_id}});
+        console.log(cellExists);
 
         if(!cellExists){
             return res.status(401).json({msg: "Usuário não cadastrado!"});
@@ -42,7 +43,8 @@ class ListaController{
         const { mes } = req.body;
         const existsMes  = await Lista.findOne({where: {mes: mes} });
         if(existsMes){
-            return res.status(400).json({msg: "Você já possui uma lista para esse mês!"});
+            const l = await Lista.findByPk(existsMes.id);
+            return res.status(200).json(l['mes']);
         }
 
         const lista = await Lista.create({
