@@ -40,11 +40,6 @@ class ListaController{
         }
         
         const { mes } = req.body;
-        const existsMes  = await Lista.findOne({where: {mes: mes} });
-        if(existsMes){
-            return res.status(400).json({msg: "Você já possui uma lista para esse mês!"});
-        }
-
         const lista = await Lista.create({
             //user_id: req.userId,
             cell_id: cellExists.id,
