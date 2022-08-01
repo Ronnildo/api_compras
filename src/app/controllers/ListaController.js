@@ -23,7 +23,7 @@ class ListaController{
 
     async store(req, res){
         const schema = Yup.object().shape({
-            novoMes: Yup.string().required(),
+            mes: Yup.string().required(),
         });
         if(!(await schema.isValid(req.body))){
             return res.status(400).json({msg: 'Campos inválidos'});
