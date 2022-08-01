@@ -9,6 +9,7 @@ const Cell = require('../models/Cell');
 class ListaController{
     async index(req, res){
         const {cell_id} = req.params;
+        const cellExists = await Cell.findOne({where: {cell_id: cell_id}});
 
         const cell = await Cell.findByPk(cellExists.id, {
             attributes: ['id', 'cell_id'],
