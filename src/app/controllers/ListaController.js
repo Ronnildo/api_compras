@@ -10,9 +10,6 @@ class ListaController{
     async index(req, res){
         const {cell_id} = req.params;
 
-        const cellExists = await Cell.findOne({where: {cell_id: cell_id}});
-        console.log(cellExists);
-
         const cell = await Cell.findByPk(cellExists.id, {
             attributes: ['id', 'cell_id'],
             include: {
@@ -26,7 +23,7 @@ class ListaController{
 
     async store(req, res){
         const schema = Yup.object().shape({
-            mes: Yup.string().required(),
+            novoMes: Yup.string().required(),
         });
         if(!(await schema.isValid(req.body))){
             return res.status(400).json({msg: 'Campos inválidos'});
@@ -77,14 +74,15 @@ class ListaController{
     }
 
     async delete(req, res){
-        const lista = await Lista.findByPk(req.params.id);
+        const { lista_id } = req.params;
+        const lista = await Lista.findByPk(lista_id);
         console.log(lista);
         if(!lista){
             return res.status(401).json({msg: "Lista não existe!"});
         }
 
         const { mes } = await lista.destroy();
-        return res.json({msg: "Lista excluida!"});
+        return res.status(200).json(mes);
     }
 }
 
