@@ -23,6 +23,12 @@ class ItemController{
         return res.json(listas);
     }
 
+    async get(req, res){
+        const {item_category} = req.params;
+        const itens = await Item.findAll({where: {category: item_category}});
+        return res.status(200).json(itens);
+    }
+
     async store(req, res){
         const schema = Yup.object().shape({
             nameItem: Yup.string().required(),

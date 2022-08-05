@@ -31,7 +31,9 @@ class ListaController{
         }
         
         const {cell_id} = req.params;
-        const cellExists = await Cell.findOne({where: {cell_id: cell_id}});
+        const cellExists = await Cell.findOne({where: {cell_id: cell_id}}, {
+            attributes: ["id", "nameItem", "category"]
+        });
 
         if(!cellExists){
             return res.status(401).json({msg: "Usuário não cadastrado!"});

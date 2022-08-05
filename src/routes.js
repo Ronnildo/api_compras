@@ -30,6 +30,7 @@ routes.delete("/lista/:lista_id", ListaController.delete);
 // Itens
 routes.post("/lista/:lista_id/item", ItemController.store);
 routes.get("/lista/:lista_id/itens", ItemController.index);
+routes.get("/lista/:lista_id/itens/:item_category", ItemController.get);
 routes.put("/updateitem", ItemController.update);
 routes.delete("/item/:item_id", ItemController.delete);
 
