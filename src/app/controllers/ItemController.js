@@ -26,7 +26,7 @@ class ItemController{
     async get(req, res){
         const {item_category} = req.params;
         const itens = await Item.findAll({where: {category: item_category}});
-        return res.status(200).json(itens);
+        return res.status(200).json({"itens": itens});
     }
 
     async store(req, res){
